@@ -100,21 +100,20 @@ const Game: React.VFC = () => {
     setXIsNext(step % 2 === 0)
   }
 
-    const historyCurrent = [...history]
-    const current = historyCurrent[stepNumber]
-    const winner = calculateWinner(current.squares)
+  const historyCurrent = [...history]
+  const current = historyCurrent[stepNumber]
+  const winner = calculateWinner(current.squares)
 
-    const moves = history.map((_step, move) => {
-      const desc = move ? `Go to move #${move}` : 'Go to game start'
-      return (
-        <li key={move}>
-          <button onClick={() => jumpTo(move)}>{desc}</button>
-        </li>
-      );
-    });
+  const moves = history.map((_step, move) => {
+    const desc = move ? `Go to move #${move}` : 'Go to game start'
+    return (
+      <li key={move}>
+        <button onClick={() => jumpTo(move)}>{desc}</button>
+      </li>
+    )
+  })
 
-    const status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? 'X' : 'O'}`
-
+  const status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? 'X' : 'O'}`
     return (
       <div className="game">
         <div className="game-board">
@@ -128,7 +127,7 @@ const Game: React.VFC = () => {
           <ol>{moves}</ol>
         </div>
       </div>
-    );
-}
+    )
+  }
 
 ReactDOM.render(<Game />, document.getElementById("root"));

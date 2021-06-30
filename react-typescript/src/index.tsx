@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
+import React, { useState } from "react"
+import ReactDOM from "react-dom"
+import "./index.css"
 
 type SquaresType = (string | null)[]
 
@@ -32,7 +32,7 @@ const calculateWinner = (squares: SquaresType) => {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      return squares[a]
     }
   }
   return null;
@@ -69,7 +69,7 @@ const Board: React.VFC<BoardProps> = (props) => {
           {renderSquare(8)}
         </div>
       </div>
-    );
+    )
 }
 
 const Game: React.VFC = () => {
@@ -130,7 +130,5 @@ const Game: React.VFC = () => {
       </div>
     );
 }
-
-// ========================================
 
 ReactDOM.render(<Game />, document.getElementById("root"));

@@ -1,6 +1,6 @@
-import React, { useState } from "react"
-import ReactDOM from "react-dom"
-import "./index.css"
+import React, { useState } from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
 
 type SquaresType = (string | null)[]
 
@@ -40,7 +40,7 @@ const calculateWinner = (squares: SquaresType) => {
 
 const Square: React.VFC<SquareProps> = (props) => {
   return (
-    <button className="square" onClick={props.onClick}>
+    <button className='square' onClick={props.onClick}>
       {props.value}
     </button>
   );
@@ -53,17 +53,17 @@ const Board: React.VFC<BoardProps> = (props) => {
 
     return (
       <div>
-        <div className="board-row">
+        <div className='board-row'>
           {renderSquare(0)}
           {renderSquare(1)}
           {renderSquare(2)}
         </div>
-        <div className="board-row">
+        <div className='board-row'>
           {renderSquare(3)}
           {renderSquare(4)}
           {renderSquare(5)}
         </div>
-        <div className="board-row">
+        <div className='board-row'>
           {renderSquare(6)}
           {renderSquare(7)}
           {renderSquare(8)}
@@ -115,14 +115,14 @@ const Game: React.VFC = () => {
 
   const status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? 'X' : 'O'}`
     return (
-      <div className="game">
-        <div className="game-board">
+      <div className='game'>
+        <div className='game-board'>
           <Board
             squares={current.squares}
             onClick={i => handleClick(i)}
           />
         </div>
-        <div className="game-info">
+        <div className='game-info'>
           <div>{status}</div>
           <ol>{moves}</ol>
         </div>
@@ -130,4 +130,4 @@ const Game: React.VFC = () => {
     )
   }
 
-ReactDOM.render(<Game />, document.getElementById("root"));
+ReactDOM.render(<Game />, document.getElementById('root'));

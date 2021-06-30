@@ -18,7 +18,7 @@ interface History {
   squares: SquaresType
 }
 
-const calculateWinner = (squares: SquareType) => {
+const calculateWinner = (squares: SquaresType) => {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -80,33 +80,32 @@ const Game: React.VFC = () => {
   const [xIsNext, setXIsNext] = useState(true)
 
   const handleClick = (i: number) => {
-    const historyCurrent = history.slice(0, stepNumber + 1);
-    const current = historyCurrent[historyCurrent.length - 1];
-    const squares = current.squares.slice();
+    const historyCurrent = history.slice(0, stepNumber + 1)
+    const current = historyCurrent[historyCurrent.length - 1]
+    const squares = current.squares.slice()
 
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
-    squares[i] = state.xIsNext ? "X" : "O";
+
+    squares[i] = xIsNext ? 'X' : 'O'
 
     setHistory([...historyCurrent, { squares }])
     setStepNumber(historyCurrent.length)
-
-  jumpTo(step) {
-    setState({
-      stepNumber: step,
-      xIsNext: (step % 2) === 0
-    });
+    setXIsNext(!xIsNext)
   }
 
-    const history = state.history;
-    const current = history[state.stepNumber];
-    const winner = calculateWinner(current.squares);
+  const jumpTo = (step: number) => {
+    setStepNumber(step)
+    setXIsNext(step % 2 === 0)
+  }
 
-    const moves = history.map((step, move) => {
-      const desc = move ?
-        'Go to move #' + move :
-        'Go to game start';
+    const historyCurrent = [...history]
+    const current = historyCurrent[stepNumber]
+    const winner = calculateWinner(current.squares)
+
+    const moves = history.map((_step, move) => {
+      const desc = move ? `Go to move #${move}` : 'Go to game start'
       return (
         <li key={move}>
           <button onClick={() => jumpTo(move)}>{desc}</button>
@@ -114,12 +113,7 @@ const Game: React.VFC = () => {
       );
     });
 
-    let status;
-    if (winner) {
-      status = "Winner: " + winner;
-    } else {
-      status = "Next player: " + (state.xIsNext ? "X" : "O");
-    }
+    const status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? 'X' : 'O'}`
 
     return (
       <div className="game">

@@ -77,26 +77,20 @@ const Game: React.VFC = () => {
     { squares: Array(9).fill(null) }
   ])
   const [stepNumber, setStepNumber] = useState(0)
-  const [xIsNext, setIsNext] = useState(true)
+  const [xIsNext, setXIsNext] = useState(true)
 
   const handleClick = (i: number) => {
-    const history = history.slice(0, stepNumber + 1);
-    const current = history[history.length - 1];
+    const historyCurrent = history.slice(0, stepNumber + 1);
+    const current = historyCurrent[historyCurrent.length - 1];
     const squares = current.squares.slice();
+
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
     squares[i] = state.xIsNext ? "X" : "O";
-    setState({
-      history: history.concat([
-        {
-          squares: squares
-        }
-      ]),
-      stepNumber: history.length,
-      xIsNext: state.xIsNext
-    });
-  }
+
+    setHistory([...historyCurrent, { squares }])
+    setStepNumber(historyCurrent.length)
 
   jumpTo(step) {
     setState({
